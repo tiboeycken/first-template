@@ -4,9 +4,20 @@ variable "infisical_host" {
   default     = "https://app.infisical.com"
 }
 
-variable "infisical_workspace_id" {
+variable "infisical_ws_id" {
   description = "Infisical project/workspace ID used to fetch runtime values."
   type        = string
+}
+
+variable "infisical_auth_id" {
+  description = "Infisical universal auth client ID."
+  type        = string
+}
+
+variable "infisical_auth_secret" {
+  description = "Infisical universal auth client secret."
+  type        = string
+  sensitive   = true
 }
 
 variable "infisical_env_slug" {

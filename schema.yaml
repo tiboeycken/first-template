@@ -14,6 +14,9 @@ components:
         - assign_public_ip
         - create_http_firewall
         - nginx_start_page_title
+        - infisical_ws_id
+        - infisical_auth_id
+        - infisical_auth_secret
       properties:
         vm_name:
           title: VM Name
@@ -63,3 +66,27 @@ components:
           default: true
           x-walrus-ui:
             group: Network
+
+        infisical_ws_id:
+          title: Infisical Workspace ID
+          description: Infisical project/workspace ID used to fetch runtime values.
+          type: string
+          x-walrus-ui:
+            group: Infisical
+
+        infisical_auth_id:
+          title: Infisical Universal Auth Client ID
+          description: Infisical universal auth client ID.
+          type: string
+          x-walrus-ui:
+            group: Infisical
+
+        infisical_auth_secret:
+          title: Infisical Universal Auth Client Secret
+          description: Infisical universal auth client secret.
+          type: string
+          format: password
+          writeOnly: true
+          x-walrus-ui:
+            group: Infisical
+            widget: TextArea

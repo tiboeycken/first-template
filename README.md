@@ -24,7 +24,9 @@ This template is the first working slice for a Walrus + Google Cloud setup.
 Example variable export (PowerShell):
 
 ```powershell
-$env:TF_VAR_infisical_workspace_id = "replace-with-workspace-id"
+$env:TF_VAR_infisical_ws_id = "replace-with-workspace-id"
+$env:TF_VAR_infisical_auth_id = "replace-with-client-id"
+$env:TF_VAR_infisical_auth_secret = "replace-with-client-secret"
 $env:TF_VAR_infisical_env_slug = "dev"
 $env:TF_VAR_infisical_folder_path = "/GCP"
 ```
@@ -67,6 +69,8 @@ Set these in your execution context (local shell or runner):
 - `INFISICAL_UNIVERSAL_AUTH_CLIENT_ID`
 - `INFISICAL_UNIVERSAL_AUTH_CLIENT_SECRET`
 
+Terraform variable names must still use valid Terraform identifiers, so the Infisical inputs are exposed with short snake_case names under the 30-character limit.
+
 ## Security notes
 
 - `terraform.tfstate` can contain sensitive values. Keep it local-only for development or move to a secure encrypted remote backend.
@@ -108,6 +112,9 @@ User-facing inputs in this template:
 Internal-only values (not exposed in the schema form):
 
 - `infisical_workspace_id`
+- `infisical_ws_id`
+- `infisical_auth_id`
+- `infisical_auth_secret`
 - `infisical_env_slug`
 - `infisical_folder_path`
 - All `infisical_key_*` variables

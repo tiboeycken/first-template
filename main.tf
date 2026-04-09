@@ -1,9 +1,11 @@
 provider "infisical" {
-  host = var.infisical_host
+  host          = var.infisical_host
+  client_id     = var.infisical_auth_id
+  client_secret = var.infisical_auth_secret
 }
 
 data "infisical_secrets" "runtime" {
-  workspace_id = var.infisical_workspace_id
+  workspace_id = var.infisical_ws_id
   env_slug     = var.infisical_env_slug
   folder_path  = var.infisical_folder_path
 }
