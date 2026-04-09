@@ -1,0 +1,75 @@
+version: 1.0
+name: first-template
+description: Minimal GCP nginx VM template
+
+inputGroups:
+  - name: vm
+    title: VM Configuration
+    inputs:
+      vm_name:
+        title: VM Name
+        description: Name of the VM to create.
+        type: string
+        required: true
+        default: nginx
+
+      gcp_machine_type:
+        title: Machine Type
+        description: GCP machine type for the VM.
+        type: string
+        required: true
+        default: e2-micro
+
+      vm_disk_size_gb:
+        title: Disk Size (GB)
+        description: Primary disk size in GB.
+        type: number
+        required: true
+        default: 12
+        minimum: 10
+
+      nginx_start_page_title:
+        title: Nginx Page Title
+        description: Title shown in the generated nginx start page.
+        type: string
+        required: true
+        default: Nginx is running
+
+  - name: network
+    title: Network
+    inputs:
+      assign_public_ip:
+        title: Assign Public IP
+        description: Assign an ephemeral public IP address to the VM.
+        type: boolean
+        required: true
+        default: true
+
+      create_http_firewall:
+        title: Create HTTP Firewall Rule
+        description: Create a firewall rule that allows inbound HTTP traffic on port 80.
+        type: boolean
+        required: true
+        default: true
+
+outputs:
+  - name: vm_name
+    title: VM Name
+    description: Created VM name
+    type: string
+
+  - name: vm_public_ip
+    title: Public IP
+    description: Ephemeral public IP address when assign_public_ip=true
+    type: string
+
+  - name: vm_id
+    title: VM ID
+    description: Created VM ID
+    type: string
+
+  - name: gcp_zone
+    title: GCP Zone
+    description: GCP zone where the VM is deployed
+    type: string
+    sensitive: true
