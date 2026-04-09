@@ -44,7 +44,7 @@ locals {
   )
 
   rendered_startup_script = replace(
-    templatefile("${path.module}/../scripts/startup.sh.tftpl", {
+    templatefile("${path.module}/scripts/startup.sh.tftpl", {
       vm_name     = var.vm_name
       page_title  = var.nginx_start_page_title
       environment = var.infisical_env_slug

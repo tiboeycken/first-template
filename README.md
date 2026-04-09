@@ -10,7 +10,7 @@ This template is the first working slice for a Walrus + Google Cloud setup.
 
 ## Folder layout
 
-- `terraform/` contains the Google Cloud provisioning code.
+- Template root contains the Terraform module files (`main.tf`, `variables.tf`, `outputs.tf`, `versions.tf`).
 - `scripts/` contains the startup script template for nginx.
 
 ## First deployment flow
@@ -18,7 +18,7 @@ This template is the first working slice for a Walrus + Google Cloud setup.
 1. Set Terraform input variables via environment variables (`TF_VAR_*`).
 2. Authenticate to Infisical using machine identity credentials in the run environment.
 3. Ensure all required GCP keys exist in Infisical before running Terraform.
-4. Run `terraform init` and `terraform apply` inside `terraform/`.
+4. Run `terraform init` and `terraform apply` in the template root.
 5. Verify that the VM boots and that nginx is reachable.
 
 Example variable export (PowerShell):
@@ -55,8 +55,8 @@ Store these keys under the configured folder path:
 Use this checklist when introducing a new runtime value from Infisical:
 
 1. Add the secret in Infisical under the configured folder path.
-2. Add an `infisical_key_*` variable in `terraform/variables.tf` for the secret key name.
-3. Add a `resolved_*` local in `terraform/main.tf` that reads from `local.infisical_secret_map`.
+2. Add an `infisical_key_*` variable in `variables.tf` for the secret key name.
+3. Add a `resolved_*` local in `main.tf` that reads from `local.infisical_secret_map`.
 4. Use the new `local.resolved_*` value in the target provider or resource.
 5. If the value is required, add it to the `credential_guard` precondition so Terraform fails fast.
 
@@ -93,6 +93,8 @@ Set these in your execution context (local shell or runner):
 ## Walrus schema usage
 
 This template now includes `schema.yaml` in the template root. Walrus can use this file to render a user-facing deployment form and display selected outputs after deployment.
+
+Note: Walrus expects `schema.yaml` in OpenAPI 3.0 UI Schema format. If the schema format is invalid, Walrus may show an empty form.
 
 User-facing inputs in this template:
 
